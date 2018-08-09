@@ -1,0 +1,58 @@
+Array.reduce
+
+1:统计字符串出现的次数
+var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+
+var countedNames = names.reduce(function (allNames, name) { 
+  if (name in allNames) {
+    allNames[name]++;
+  }
+  else {
+    allNames[name] = 1;
+  }
+  return allNames;
+}, {});
+// countedNames is:
+// { 'Alice': 2, 'Bob': 1, 'Tiff': 1, 'Bruce': 1 }
+
+2:统计数组求和
+var total = [ 0, 1, 2, 3 ].reduce(
+  ( acc, cur ) => acc + cur,
+  0
+);
+3:二维数组转化为一维数组
+var flattened = [[0, 1], [2, 3], [4, 5]].reduce(
+  function(a, b) {
+    return a.concat(b);
+  },
+  []
+);
+// flattened is [0, 1, 2, 3, 4, 5]
+4:使用扩展运算符和initialValue绑定包含在对象数组中的数组
+// friends - an array of objects 
+// where object field "books" - list of favorite books 
+var friends = [{
+  name: 'Anna',
+  books: ['Bible', 'Harry Potter'],
+  age: 21
+}, {
+  name: 'Bob',
+  books: ['War and peace', 'Romeo and Juliet'],
+  age: 26
+}, {
+  name: 'Alice',
+  books: ['The Lord of the Rings', 'The Shining'],
+  age: 18
+}];
+
+// allbooks - list which will contain all friends' books +  
+// additional list contained in initialValue
+var allbooks = friends.reduce(function(prev, curr) {
+  return [...prev, ...curr.books];
+}, ['Alphabet']);
+
+// allbooks = [
+//   'Alphabet', 'Bible', 'Harry Potter', 'War and peace', 
+//   'Romeo and Juliet', 'The Lord of the Rings',
+//   'The Shining'
+// ]
